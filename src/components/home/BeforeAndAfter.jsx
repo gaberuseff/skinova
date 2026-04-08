@@ -16,8 +16,8 @@ function BeforeAndAfter({content}) {
           </div>
 
           <ImageComparison
-            beforeImage="/works/work-5.webp"
-            afterImage="/works/work-6.webp"
+            beforeImage="/works/work-6.webp"
+            afterImage="/works/work-5.webp"
             altBefore={content.altBefore}
             altAfter={content.altAfter}
           />

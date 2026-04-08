@@ -18,7 +18,7 @@ export function SimpleHeader({locale, content}) {
       <nav
         aria-label={content.mainNavigation}
         className="mx-auto flex h-14 w-full max-w-7xl items-center px-4">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-1 items-center gap-2 lg:flex-none">
           <MirrorRound className="size-6" />
           <Link href={homeHref} className="font-mono text-lg font-bold">
             {content.brand}

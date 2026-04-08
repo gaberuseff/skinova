@@ -6,13 +6,6 @@ export default function FooterSection({locale, content}) {
   return (
     <footer className="py-8">
       <div className="mx-auto max-w-5xl px-6">
-        <Link
-          href={homeHref}
-          aria-label="Go to homepage"
-          className="mx-auto block size-fit text-sm font-semibold">
-          Skinova
-        </Link>
-
         <nav aria-label="Footer navigation" className="my-8">
           <ul className="flex flex-wrap justify-center gap-6" role="list">
             {content.links.map((link, index) => (
