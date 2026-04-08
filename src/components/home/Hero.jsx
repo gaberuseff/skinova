@@ -1,40 +1,37 @@
 import {HeroSection2} from "../hero-section2";
 
-function Hero() {
+function Hero({content, isRtl = false}) {
   return (
-    <section className="relative overflow-hidden">
+    <div className="relative overflow-hidden">
       <div className="w-full">
         <HeroSection2
+          isRtl={isRtl}
           logo={{
             url: "https://vucvdpamtrjkzmubwlts.supabase.co/storage/v1/object/public/users/user_2zMtrqo9RMaaIn4f8F2z3oeY497/avatar.png",
-            alt: "Skinova Clinic Logo",
-            text: "Skinova Clinic",
+            alt: content.logoAlt,
+            text: content.logoText,
           }}
-          slogan="ADVANCED AESTHETIC CARE"
+          slogan={content.slogan}
           title={
             <>
-              Reveal Your Best Skin <br />
-              <span className="text-primary">With Expert Hands</span>
+              {content.title} <br />
+              <span className="text-primary">{content.titleAccent}</span>
             </>
           }
-          subtitle="From personalized facials to laser treatments and injectables, we craft safe, natural-looking results tailored to your goals."
+          subtitle={content.subtitle}
           callToAction={{
-            text: "Book Now",
+            text: content.ctaPrimary,
             href: "https://wa.me/201500223440",
           }}
           callToAction2={{
-            text: "Location",
+            text: content.ctaSecondary,
             href: "https://goo.gl/maps/1Z5n9XoVh7mL2jvH6",
           }}
           backgroundImage="/hero.webp"
-          contactInfo={{
-            website: "gaberuseff.com",
-            phone: "+20 (1500) 223-440",
-            address: "6th of October City, Giza, Egypt",
-          }}
+          contactInfo={content.contactInfo}
         />
       </div>
-    </section>
+    </div>
   );
 }
 

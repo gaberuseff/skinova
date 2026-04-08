@@ -1,23 +1,6 @@
-import Hero from "@/components/home/Hero"
-import Features from "@/components/home/Features"
-import Testimonials from "@/components/home/Testimonials"
-import WorksImages from "@/components/home/WorksImages"
-import CallToAction from "@/components/home/CallToAction"
-import Contact from "@/components/home/Contact"
-import BeforeAndAfter from "@/components/home/BeforeAndAfter"
+import { redirect } from "next/navigation";
+import { defaultLocale } from "@/i18n/config";
 
-function page() {
-  return (
-    <>
-      <Hero />
-      <Features />
-      <Testimonials />
-      <BeforeAndAfter />
-      <WorksImages />
-      <CallToAction />
-      <Contact />
-    </>
-  )
+export default function Page() {
+  redirect(`/${defaultLocale}`);
 }
-
-export default page

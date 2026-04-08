@@ -126,11 +126,21 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+
+  [dir="rtl"] {
+    font-family: var(--font-clinic-arabic), var(--font-clinic-sans), sans-serif;
   }
 }
 
 @layer utilities {
   .font-heading {
     font-family: var(--font-clinic-display), serif;
+  }
+
+  [dir="rtl"] .font-heading {
+    font-family:
+      var(--font-clinic-arabic-heading), var(--font-clinic-arabic), sans-serif;
   }
 }

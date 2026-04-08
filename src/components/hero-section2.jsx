@@ -59,7 +59,11 @@ const InfoIcon = ({type}) => {
       </svg>
     ),
   };
-  return <div className="mr-2 shrink-0">{icons[type]}</div>;
+  return (
+    <div className="mr-2 shrink-0" aria-hidden="true">
+      {icons[type]}
+    </div>
+  );
 };
 
 const HeroSection2 = forwardRef(
@@ -74,6 +78,7 @@ const HeroSection2 = forwardRef(
       callToAction2,
       backgroundImage,
       contactInfo,
+      isRtl = false,
       ...props
     },
     ref,
@@ -121,7 +126,7 @@ const HeroSection2 = forwardRef(
               )}
             </header>
 
-            <main>
+            <div>
               <h1 className="text-4xl leading-tight text-foreground md:text-5xl">
                 {title}
               </h1>
@@ -130,7 +135,7 @@ const HeroSection2 = forwardRef(
                 {subtitle}
               </p>
 
-              <div className="space-x-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <Button asChild size="lg">
                   {isExternalCta ? (
                     <a href={ctaHref} target="_blank" rel="noopener noreferrer">
@@ -146,7 +151,7 @@ const HeroSection2 = forwardRef(
                 </Button>
 
                 {callToAction2 && (
-                  <Button asChild size="lg" className="mt-4" variant="outline">
+                  <Button asChild size="lg" variant="outline">
                     {isExternalCta2 ? (
                       <a
                         href={cta2Href}
@@ -164,13 +169,15 @@ const HeroSection2 = forwardRef(
                   </Button>
                 )}
               </div>
-            </main>
+            </div>
           </div>
 
           {/* Bottom Section: Footer Info */}
-          <footer className="mt-12 w-full">
-            <div className="grid grid-cols-1 gap-6 text-xs text-muted-foreground sm:grid-cols-3">
-              <div className="flex items-center">
+          <address className="mt-12 w-full not-italic">
+            <ul
+              className="grid grid-cols-1 gap-6 text-xs text-muted-foreground sm:grid-cols-3"
+              role="list">
+              <li className="flex items-center">
                 <InfoIcon type="website" />
                 <a
                   href={`https://${contactInfo.website}`}
@@ -179,16 +186,16 @@ const HeroSection2 = forwardRef(
                   className="text-primary hover:underline">
                   {contactInfo.website}
                 </a>
-              </div>
-              <div className="flex items-center">
+              </li>
+              <li className="flex items-center" dir="ltr">
                 <InfoIcon type="phone" />
                 <a
                   href={`tel:${contactInfo.phone}`}
                   className="text-primary hover:underline">
                   {contactInfo.phone}
                 </a>
-              </div>
-              <div className="flex items-center">
+              </li>
+              <li className="flex items-center">
                 <InfoIcon type="address" />
                 <a
                   href="https://www.google.com/maps/@30.0173687,31.1428067,12.5z?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D"
@@ -197,16 +204,20 @@ const HeroSection2 = forwardRef(
                   className="text-primary hover:underline">
                   {contactInfo.address}
                 </a>
-              </div>
-            </div>
-          </footer>
+              </li>
+            </ul>
+          </address>
         </div>
         {/* Right Side: Image */}
         <div
+          role="img"
+          aria-label="Skin clinic hero image"
           className="w-full min-h-75 bg-cover bg-center md:w-1/2 md:min-h-full lg:w-2/5"
           style={{
             backgroundImage: `url(${backgroundImage})`,
-            clipPath: "polygon(25% 0, 100% 0, 100% 100%, 0% 100%)",
+            clipPath: isRtl
+              ? "polygon(0 0, 75% 0, 100% 100%, 0 100%)"
+              : "polygon(25% 0, 100% 0, 100% 100%, 0% 100%)",
           }}></div>
       </section>
     );

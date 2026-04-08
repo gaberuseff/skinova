@@ -60,6 +60,8 @@ export const ImageComparison = ({
   return (
     <div
       ref={containerRef}
+      role="group"
+      aria-label="Before and after image comparison"
       className="relative w-full max-w-4xl mx-auto select-none rounded-xl overflow-hidden h-80 sm:h-96 lg:h-128"
       onMouseMove={handleMouseMove}
       // Stop dragging if mouse leaves the container
@@ -95,7 +97,8 @@ export const ImageComparison = ({
         // Center the handle on the line
         style={{left: `calc(${sliderPosition}% - 0.375rem)`}}
         onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}>
+        onTouchStart={handleTouchStart}
+        aria-hidden="true">
         <div
           className={`bg-white rounded-full h-12 w-12 flex items-center justify-center shadow-md transition-all duration-200 ease-in-out ${isDragging ? "scale-110 shadow-xl" : ""}`}>
           <svg
@@ -114,6 +117,20 @@ export const ImageComparison = ({
           </svg>
         </div>
       </div>
+
+      <label htmlFor="image-comparison-slider" className="sr-only">
+        Move slider to compare before and after images
+      </label>
+      <input
+        id="image-comparison-slider"
+        className="sr-only"
+        type="range"
+        min={0}
+        max={100}
+        value={Math.round(sliderPosition)}
+        onChange={(event) => setSliderPosition(Number(event.target.value))}
+        aria-label="Before and after slider"
+      />
     </div>
   );
 };

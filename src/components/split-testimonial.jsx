@@ -5,39 +5,14 @@ import {motion, AnimatePresence} from "framer-motion";
 import {ArrowUpRight} from "lucide-react";
 import Image from "next/image";
 
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      "My skin looked calmer and brighter within weeks. The team explained every step and made me feel completely at ease.",
-    name: "Nour Hassan",
-    role: "Acne Care Patient",
-    company: "Skinova Clinic",
-    image: "/testimonials/user-3.webp",
-  },
-  {
-    id: 2,
-    quote:
-      "From consultation to follow-up, everything was professional and personalized. I finally found a clinic I can trust.",
-    name: "Omar Khaled",
-    role: "Laser Treatment Patient",
-    company: "Skinova Clinic",
-    image: "/testimonials/user-2.webp",
-  },
-  {
-    id: 3,
-    quote:
-      "The doctors are attentive, the clinic is spotless, and my results feel natural. I recommend Skinova to everyone.",
-    name: "Layla Mahmoud",
-    role: "Skin Rejuvenation Patient",
-    company: "Skinova Clinic",
-    image: "/testimonials/user-1.webp",
-  },
-];
-
-export function TestimonialsSplit() {
+export function TestimonialsSplit({content}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+
+  const testimonials = content.items.map((item, index) => ({
+    ...item,
+    id: index + 1,
+  }));
 
   const active = testimonials[activeIndex];
 
@@ -45,11 +20,24 @@ export function TestimonialsSplit() {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
   };
 
+  const onKeyAdvance = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      nextTestimonial();
+    }
+  };
+
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
-      <div
+    <section
+      className="w-full max-w-5xl mx-auto px-4 sm:px-6"
+      aria-label="Patient testimonials">
+      <article
+        role="button"
+        tabIndex={0}
+        aria-label="Show next testimonial"
         className="relative grid grid-cols-1 gap-8 items-start cursor-pointer group md:grid-cols-[1fr_auto] md:gap-12 md:items-center"
         onClick={nextTestimonial}
+        onKeyDown={onKeyAdvance}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}>
         {/* Left: Quote Content */}
@@ -133,7 +121,7 @@ export function TestimonialsSplit() {
             }}
             transition={{duration: 0.2}}
             className="absolute -bottom-10 left-1/2 -translate-x-1/2 hidden items-center gap-2 text-xs text-muted-foreground md:flex">
-            <span>Next</span>
+            <span>{content.next}</span>
             <ArrowUpRight className="w-3 h-3" />
           </motion.div>
         </div>
@@ -142,7 +130,10 @@ export function TestimonialsSplit() {
         <div className="mt-2 flex items-center gap-3 md:absolute md:-bottom-16 md:left-0 md:mt-0">
           {testimonials.map((_, index) => (
             <button
+              type="button"
               key={index}
+              aria-label={`Go to testimonial ${index + 1}`}
+              aria-current={index === activeIndex ? "true" : undefined}
               onClick={(e) => {
                 e.stopPropagation();
                 setActiveIndex(index);
@@ -168,7 +159,7 @@ export function TestimonialsSplit() {
             </button>
           ))}
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

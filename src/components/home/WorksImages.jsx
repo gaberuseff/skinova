@@ -1,9 +1,9 @@
 import ImageGallery from "../image-gallery";
 
-function WorksImages() {
+function WorksImages({content}) {
   return (
-    <section className="relative py-14 md:py-20">
-      <ImageGallery />
+    <section className="relative py-14" id="works">
+      <ImageGallery content={content} />
     </section>
   );
 }
