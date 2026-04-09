@@ -1,4 +1,4 @@
-import ImageGallery from "../image-gallery";
+import { ImageGallery } from "../image-gallery";
 
 function WorksImages({content}) {
   return (
